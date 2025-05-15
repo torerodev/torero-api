@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "torero-api"
+version = "0.1.0"
+description = "RESTful API for torero service management"
+authors = [
+  { name = "William Collins", email = "opensource@itential.com" }
+]
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: System :: Systems Administration",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+  "fastapi>=0.115.0,<0.116.0",
+  "uvicorn[standard]>=0.29.0,<0.30.0",
+  "pydantic>=2.0.0,<3.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/torerodev/torero-api"
+"Bug Tracker" = "https://github.com/torerodev/torero-api/issues"
+"Documentation" = "https://github.com/torerodev/torero-api#readme"
+
+[project.scripts]
+torero-api = "torero_api.__main__:main"
+
+[tool.setuptools]
+packages = ["torero_api"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+python_classes = "Test*"
+filterwarnings = [
+    "ignore::PendingDeprecationWarning:starlette.formparsers"
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
