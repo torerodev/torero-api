@@ -35,6 +35,12 @@ torero-api --host 0.0.0.0 --port 8080
 
 # Development mode with auto-reload
 torero-api --reload
+
+# Run as background daemon
+torero-api --daemon
+
+# Daemon with custom settings
+torero-api --daemon --host 0.0.0.0 --port 8080 --log-file /var/log/torero-api.log
 ```
 
 ### Verify Installation
@@ -167,4 +173,59 @@ generate-openapi -o docs/openapi.json
 # Generate YAML version (requires PyYAML)
 pip install ".[yaml]"
 generate-openapi -o docs/openapi.yaml
+```
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `TORERO_API_HOST` | `localhost` | API server host |
+| `TORERO_API_PORT` | `8000` | API server port |
+| `TORERO_API_PID_FILE` | `/tmp/torero-api.pid` | PID file for daemon mode |
+| `TORERO_API_LOG_FILE` | `/tmp/torero-api.log` | Log file for daemon mode |
+
+### CLI Options
+
+```bash
+torero-api --help
+
+Options:
+  --host TEXT          Host to bind the server to [default: 0.0.0.0]
+  --port INTEGER       Port to bind the server to [default: 8000]
+  --log-level TEXT     Log level [default: info]
+  --reload             Enable auto-reload (development)
+  --daemon             Run as background daemon
+  --pid-file TEXT      PID file for daemon mode [default: /tmp/torero-api.pid]
+  --log-file TEXT      Log file for daemon mode [default: /tmp/torero-api.log]
+  --version            Show version information
+  --check              Check torero availability
+```
+
+### Daemon Management
+
+Use the included control script for easier daemon management:
+
+```bash
+# Make the control script executable
+chmod +x scripts/torero_api_ctl.sh
+
+# Start daemon
+./scripts/torero_api_ctl.sh start
+
+# Check status
+./scripts/torero_api_ctl.sh status
+
+# View logs
+./scripts/torero_api_ctl.sh logs
+
+# Follow logs in real-time
+./scripts/torero_api_ctl.sh follow-logs
+
+# Stop daemon
+./scripts/torero_api_ctl.sh stop
+
+# Restart daemon
+./scripts/torero_api_ctl.sh restart
 ```
