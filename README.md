@@ -20,10 +20,13 @@ Fast, and type-safe API that provides programmatic access to [torero](https://to
 
 ### Installation
 ```bash
+# Install UV (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
 # Install from source
 git clone https://github.com/torerodev/torero-api.git
 cd torero-api
-pip install -e .
+uv pip install -e .
 ```
 
 ### Running the API
@@ -172,8 +175,10 @@ registries = response.json()
 git clone https://github.com/torerodev/torero-api.git
 cd torero-api
 
-# Install with development dependencies
-pip install -e ".[dev]"
+# Create virtual environment and install with development dependencies
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install -e . --all-extras
 
 # Install pre-commit hooks
 pre-commit install
@@ -201,7 +206,7 @@ pytest -v
 generate-openapi -o docs/openapi.json
 
 # Generate YAML version (requires PyYAML)
-pip install ".[yaml]"
+uv pip install -e ".[yaml]"
 generate-openapi -o docs/openapi.yaml
 ```
 
