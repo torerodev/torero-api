@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "torero-api"
@@ -11,6 +11,8 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.10,<4.0"
+license = {text = "Apache-2.0"}
+keywords = ["fastapi", "api", "torero", "automation", "ansible", "opentofu"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Web Environment",
@@ -37,6 +39,8 @@ dependencies = [
 "Homepage" = "https://github.com/torerodev/torero-api"
 "Bug Tracker" = "https://github.com/torerodev/torero-api/issues"
 "Documentation" = "https://github.com/torerodev/torero-api#readme"
+"Source Code" = "https://github.com/torerodev/torero-api"
+"Changelog" = "https://github.com/torerodev/torero-api/releases"
 
 [project.scripts]
 torero-api = "torero_api.__main__:main"
@@ -56,11 +60,40 @@ dev = [
 ]
 all = ["torero-api[yaml,docs,dev]"]
 
-[tool.setuptools]
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.28.1",
+    "black>=23.7.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.5.0",
+    "PyYAML>=6.0",
+    "pre-commit>=3.3.3",
+    "build>=0.10.0",
+    "twine>=4.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
 packages = ["torero_api"]
 
-[tool.setuptools.package-data]
-torero_api = ["py.typed"]
+[tool.hatch.build]
+include = [
+    "torero_api/**/*.py",
+    "torero_api/py.typed",
+    "README.md",
+    "LICENSE",
+]
+exclude = [
+    "tests/",
+    "docs/",
+    "scripts/",
+    ".github/",
+]
+
+[tool.hatch.version]
+path = "torero_api/__init__.py"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
