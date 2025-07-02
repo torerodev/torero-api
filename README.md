@@ -35,7 +35,7 @@ uv pip install -e .
 torero-api
 
 # Custom host and port
-torero-api --host 0.0.0.0 --port 8080
+torero-api --host 0.0.0.0 --port 8000
 
 # Development mode with auto-reload
 torero-api --reload
@@ -44,7 +44,7 @@ torero-api --reload
 torero-api --daemon
 
 # Daemon with custom settings
-torero-api --daemon --host 0.0.0.0 --port 8080 --log-file /var/log/torero-api.log
+torero-api --daemon --host 0.0.0.0 --port 8000 --log-file /var/log/torero-api.log
 ```
 
 ### Verify Installation
